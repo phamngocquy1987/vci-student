@@ -4,6 +4,7 @@ import json
 import re
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 
 def main():
@@ -23,7 +24,11 @@ def main():
     password = getpass.getpass('Mật khẩu (ít nhất 10 ký tự): ')
     if not 10 <= len(password) <= 200 or password != getpass.getpass('Nhập lại mật khẩu: '):
         raise SystemExit('Mật khẩu không hợp lệ hoặc không khớp.')
-    payload = {'email': f'{username.lower()}@login.vci.edu.vn', 'password': password,
+    public_config = Path(__file__).resolve().parents[1] / 'deployment' / 'public-config.json'
+    config = json.loads(public_config.read_text(encoding='utf-8')) if public_config.exists() else {}
+    email = config.get('adminEmail') if username.lower() == 'admin' else None
+    email = email or f'{username.lower()}@login.vci.edu.vn'
+    payload = {'email': email, 'password': password,
                'email_confirm': True, 'app_metadata': {'vci': {
                    'username': username, 'full_name': full_name, 'role': 'admin'}}}
     headers = {'apikey': key, 'Content-Type': 'application/json'}

@@ -4,6 +4,14 @@ import ExcelJS from 'exceljs';
 import {spawnSync} from 'node:child_process';
 import {createHandler,loginEmail} from '../supabase/functions/vci-api/handler.ts';
 import {parseUpload,studentHeaders,scheduleHeaders} from '../web/excel.js';
+import {loginAddress} from '../web/cloud.js';
+test('admin accepts the configured school email while CCCD login retains its existing mapping',()=>{
+ assert.equal(loginAddress('admin','admin@vci.edu.vn'),'admin@vci.edu.vn');
+ assert.equal(loginAddress(' ADMIN@VCI.EDU.VN ','admin@vci.edu.vn'),'admin@vci.edu.vn');
+ assert.equal(loginAddress('000000000001','admin@vci.edu.vn'),'000000000001@login.vci.edu.vn');
+ assert.equal(loginAddress('admin'),'admin@login.vci.edu.vn');
+ assert.throws(()=>loginAddress('a@@vci.edu.vn'));
+});
 const env=(key:string)=>({SUPABASE_URL:'https://vci-test.supabase.co',SUPABASE_ANON_KEY:'anon-test',SUPABASE_SERVICE_ROLE_KEY:'service-test',ALLOWED_ORIGINS:'https://school.example'}[key]);
 function request(body:any,token='valid',origin='https://school.example'){return new Request('https://edge.example/vci-api',{method:'POST',headers:{Origin:origin,...(token?{Authorization:`Bearer ${token}`}:{})},body:JSON.stringify(body)});}
 function fixture(role='admin'){

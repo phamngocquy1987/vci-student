@@ -54,6 +54,12 @@ Khóa máy chủ `SUPABASE_SERVICE_ROLE_KEY` được Supabase cấp sẵn trong
 
 ## 4. Tạo tài khoản quản trị đầu tiên
 
+**Cấu hình hiện tại dùng `admin@vci.edu.vn` cho quản trị**, theo lựa chọn của nhà trường. Trong Authentication → Users → Add user → Create new user, tạo email này, đặt mật khẩu riêng và bật Auto confirm user. Sau đó chạy tệp `deployment/tao-quan-tri.sql` trong SQL Editor để cấp quyền cho đúng tài khoản đã tạo. Tệp không chứa mật khẩu, không đổi quyền tài khoản sinh viên và có thể chạy lại mà không tạo quản trị trùng. App nhận tên đăng nhập `admin` hoặc email đầy đủ `admin@vci.edu.vn` sau khi bản cập nhật được xuất bản. Sinh viên vẫn đăng nhập bằng CCCD như trước.
+
+Nếu đổi địa chỉ quản trị về sau, cập nhật `adminEmail` trong `deployment/public-config.json` và email của đúng tài khoản Supabase tương ứng; cấu hình tên đăng nhập không tự cấp quyền cho một tài khoản.
+
+Cách tạo bằng công cụ trên máy (thay cho Dashboard):
+
 Chạy trên máy của bạn:
 
 ```powershell

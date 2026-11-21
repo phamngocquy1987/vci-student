@@ -11,6 +11,8 @@ const output=path.join(root,process.env.VCI_BUILD_TEST==='1'?'dist-test':'dist')
 let publicConfig={};
 try{publicConfig=JSON.parse(await readFile(path.join(root,'deployment/public-config.json'),'utf8'));}catch(error){if(error.code!=='ENOENT')throw error;}
 const url=process.env.SUPABASE_URL||publicConfig.supabaseUrl||'',key=process.env.SUPABASE_PUBLISHABLE_KEY||process.env.SUPABASE_ANON_KEY||publicConfig.supabaseKey||'';
+const adminEmail=String(process.env.SUPABASE_ADMIN_EMAIL||publicConfig.adminEmail||'').trim().toLowerCase();
+if(adminEmail&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminEmail))throw new Error('Invalid administrator email in public configuration.');
 if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url))throw new Error('Set SUPABASE_URL to the project URL.');
 let validKey=key.startsWith('sb_publishable_');
 try{validKey ||= JSON.parse(Buffer.from(key.split('.')[1],'base64url').toString()).role==='anon';}catch{}
@@ -25,7 +27,7 @@ let html=await readFile(path.join(root,'admin/index.html'),'utf8');
 html=html.replace('<title>','<link rel="manifest" href="manifest.webmanifest"><title>');
 html=html.replace('<title>',`<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self' ${url} ${url.replace('https:','wss:')}; object-src 'none'; base-uri 'self'; form-action 'self'"><title>`);
 // Public frontend key is intended to be visible. Database RLS provides access control.
-await writeFile(path.join(output,'assets/config.js'),`window.VCI_CONFIG = ${JSON.stringify({mode:'supabase',supabaseUrl:url,supabaseKey:key})};\n`);
+await writeFile(path.join(output,'assets/config.js'),`window.VCI_CONFIG = ${JSON.stringify({mode:'supabase',supabaseUrl:url,supabaseKey:key,adminEmail})};\n`);
 await writeFile(path.join(output,'index.html'),html);
 await rm(path.join(output,'assets/index.html'));
 await build({entryPoints:{cloud:path.join(root,'web/cloud.js'),excel:path.join(root,'web/excel.js')},outdir:path.join(output,'assets/cloud'),bundle:true,splitting:true,format:'esm',platform:'browser',target:['safari16','chrome110'],minify:true,legalComments:'linked',chunkNames:'chunks/[name]-[hash]'});

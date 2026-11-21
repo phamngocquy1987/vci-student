@@ -12,7 +12,7 @@ import {fileURLToPath} from 'node:url';
 import ExcelJS from 'exceljs';
 import {studentHeaders} from '../web/excel.js';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-execFileSync(process.execPath,['tools/build_cloud.mjs'],{cwd:root,env:{...process.env,VCI_BUILD_TEST:'1',SUPABASE_URL:'https://vci-test.supabase.co',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_VCI_TEST_ONLY'},stdio:'inherit',windowsHide:true});
+execFileSync(process.execPath,['tools/build_cloud.mjs'],{cwd:root,env:{...process.env,VCI_BUILD_TEST:'1',SUPABASE_URL:'https://vci-test.supabase.co',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_VCI_TEST_ONLY',SUPABASE_ADMIN_EMAIL:'admin@vci.edu.vn'},stdio:'inherit',windowsHide:true});
 const db=new PGlite(),tokens=new Map<string,any>(),refreshTokens=new Map<string,any>();
 let queue=Promise.resolve();
 function locked<T>(fn:()=>Promise<T>):Promise<T>{const p=queue.then(fn);queue=p.then(()=>{},()=>{});return p;}
@@ -25,7 +25,11 @@ await db.exec(`create role anon;create role authenticated;create role service_ro
 await db.exec(await readFile(path.join(root,'supabase/migrations/202611210001_vci.sql'),'utf8'));
 async function seed(username:string,role:string,classId?:number,name?:string){const id=crypto.randomUUID();await db.query('insert into auth.users(id,email,encrypted_password,raw_app_meta_data) values($1,$2,$3,$4)',[id,`${username.toLowerCase()}@login.vci.edu.vn`,'CloudTest@2026',{vci:{username,full_name:name||username,role,class_id:classId,national_id:role==='student'&&/^\d{12}$/.test(username)?username:''}}]);return id;}
 await db.exec(`insert into public.vci_classes(code,campus,year) values('CCN03.11A','Đắk Lắk',2026),('K11B','Hà Nội',2025);`);
-const adminId=await seed('admin','admin'),studentId=await seed('000000000001','student',1,'Sinh viên lớp một');
+const adminId=crypto.randomUUID();
+await db.query('insert into auth.users(id,email,encrypted_password,raw_app_meta_data) values($1,$2,$3,$4)',[adminId,'admin@vci.edu.vn','CloudTest@2026',{}]);
+await db.exec(await readFile(path.join(root,'deployment/tao-quan-tri.sql'),'utf8'));
+await db.exec(await readFile(path.join(root,'deployment/tao-quan-tri.sql'),'utf8'));
+const studentId=await seed('000000000001','student',1,'Sinh viên lớp một');
 await seed('000000000002','student',2,'Đặng Thị Ánh');
 for(let i=0;i<101;i++)await seed(`TEST${String(i).padStart(3,'0')}`,'student',2,`Sinh viên thử ${i}`);
 await db.exec(`insert into public.vci_timetable_links(class_id,academic_year,semester,kind,title,url) values(2,'2026-2027','1','hoc','Lịch riêng lớp hai','https://drive.google.com/file/d/PRIVATE_CLASS_2/view');`);
@@ -91,6 +95,7 @@ try{
  const app=`${base}/vci-test/`;
  async function login(p:any,username:string,password='CloudTest@2026'){await p.getByLabel('Mã sinh viên / Tài khoản').fill(username);await p.getByLabel('Mật khẩu',{exact:true}).fill(password);await p.getByRole('button',{name:'Đăng nhập',exact:true}).click();}
  await page.goto(app);await login(page,'admin');await expect(page.getByRole('heading',{name:'Tổng quan đào tạo'})).toBeVisible();
+ await page.getByRole('button',{name:'Đăng xuất',exact:true}).click();await login(page,'admin@vci.edu.vn');await expect(page.getByRole('heading',{name:'Tổng quan đào tạo'})).toBeVisible();
  await page.reload();await expect(page.getByRole('heading',{name:'Tổng quan đào tạo'})).toBeVisible();
  await page.getByRole('button',{name:'Thêm link lịch học',exact:true}).click();await page.getByLabel('Lớp nhận lịch',{exact:true}).selectOption('1');await page.getByLabel('Năm học',{exact:true}).selectOption('2026-2027');await page.getByLabel('Học kỳ',{exact:true}).selectOption('1');await page.getByLabel('Tên tài liệu lịch',{exact:true}).fill('Lịch học lớp CCN03.11A');await page.getByLabel('Link Google Drive / Google Sheets',{exact:true}).fill('https://drive.google.com/file/d/CLASS_1/view');await page.getByRole('button',{name:'Lưu link lịch',exact:true}).click();await expect(page.getByRole('heading',{name:'Lịch học lớp CCN03.11A',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Lớp & sinh viên',exact:true}).click();await expect(page.getByText('1–100 / 103 sinh viên',{exact:true})).toBeVisible();await page.getByRole('button',{name:'Trang sau',exact:true}).click();await expect(page.getByText('101–103 / 103 sinh viên',{exact:true})).toBeVisible();

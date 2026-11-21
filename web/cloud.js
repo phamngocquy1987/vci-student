@@ -1,4 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
+export function loginAddress(value,adminEmail='') {
+  const username=String(value||'').trim().toLowerCase();
+  const isEmail=v=>v.length<=254&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  if(isEmail(username))return username;
+  if(!/^[a-z0-9_.-]{1,100}$/.test(username))throw new Error('Mã đăng nhập hoặc email không hợp lệ.');
+  if(username==='admin'&&adminEmail){
+    const email=String(adminEmail).trim().toLowerCase();
+    if(!isEmail(email))throw new Error('Email quản trị trong cấu hình chưa hợp lệ.');
+    return email;
+  }
+  return `${username}@login.vci.edu.vn`;
+}
 export function createCloud(config) {
   if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(config.supabaseUrl||'') || !config.supabaseKey) throw new Error('Chưa cấu hình Supabase. Xem hướng dẫn TRIỂN-KHAI-SUPABASE.');
   const client=createClient(config.supabaseUrl,config.supabaseKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'vci-cloud-session'}});
@@ -19,9 +31,8 @@ export function createCloud(config) {
       let body=options.body||{};
       if(route==='/meta')return {name:'VCI Student',version:'1.0-supabase',demo:false};
       if(route==='/login'){
-        const username=String(body.username||'').trim();
-        if(!/^[A-Za-z0-9_.-]{1,100}$/.test(username))throw new Error('Mã đăng nhập không hợp lệ.');
-        const {error:e}=await client.auth.signInWithPassword({email:`${username.toLowerCase()}@login.vci.edu.vn`,password:body.password});
+        const email=loginAddress(body.username,config.adminEmail);
+        const {error:e}=await client.auth.signInWithPassword({email,password:body.password});
         if(e)throw new Error(e.status===429?'Đăng nhập quá nhiều lần. Vui lòng thử lại sau.':'Sai tài khoản hoặc mật khẩu.');
         try{const me=await rpc('vci_read',{route:'/me',params:{}});this.userId=me.user.id;return me;}catch(e){await client.auth.signOut({scope:'local'});throw e;}
       }
