@@ -1,0 +1,41 @@
+/* School identity: supplied logo and campus artwork, with readable working surfaces. */
+:root{--navy:#086344;--orange:#edc65b;--line:#dbe9df;--muted:#61766b;color:#193e30;background:#f2f8f4}
+body{background:linear-gradient(180deg,#edf6f0 0%,#f7faf8 72%)}
+button{transition:background-color .16s,box-shadow .16s,transform .16s}
+button:focus-visible,a:focus-visible{outline:3px solid #b78f2f;outline-offset:4px}
+.brand{font-size:21px;letter-spacing:-.6px;gap:12px;line-height:1.15;min-width:0}
+.brand-logo{display:block;width:56px;height:56px;flex-shrink:0;object-fit:contain;background:white;padding:5px;border-radius:15px;box-shadow:0 3px 14px #002f2418}
+.brand-copy{min-width:0}.brand small{font-size:11px;letter-spacing:1.9px;margin-top:7px;font-weight:600}
+.shell{grid-template-columns:260px 1fr}
+.sidebar{width:260px;padding:30px 24px;background:linear-gradient(165deg,#07593c 0%,#04432f 62%,#033728 100%);box-shadow:4px 0 24px #063b2c0c}
+.sidebar .brand{margin-bottom:38px}.sidebar nav{gap:8px}.sidebar nav button{color:#d8ecdf;border-radius:10px;padding:14px 15px}
+.sidebar nav button.active{background:#ffffff16;color:white;box-shadow:inset 3px 0 #edc65b}
+.sidebar nav button:hover{background:#ffffff10}.sidebar-bottom{border-color:#edc65b44;color:#e2eee5}.sidebar-bottom strong{color:#f6d982}.sidebar-bottom a{color:#e1efe5}
+.topbar{border-top:4px solid #d8b650;border-bottom-color:var(--line);padding-top:17px;padding-bottom:17px}
+.school-name{color:#075b3d;letter-spacing:.15px}.avatar{background:#e9f5ed;color:#086344}
+.content{padding-top:30px}.heading h1{color:#124b35}.panel,.stat{border-color:var(--line);box-shadow:0 3px 16px #1d573905;border-radius:16px}
+.panel-header{background:linear-gradient(90deg,#fcfefc,#fff)}.panel-header h2{color:#174a35}
+.stat strong{color:#075b3d}.stat-icon{background:#e8f6ed;color:#086344}
+.hero{position:relative;isolation:isolate;overflow:hidden;min-height:245px;padding:34px;border:1px solid #19754b;border-radius:20px;background:linear-gradient(90deg,rgba(4,77,48,.98) 0%,rgba(4,77,48,.94) 42%,rgba(4,77,48,.48) 72%,rgba(4,77,48,.16) 100%),url('brand/campus.webp') center 58%/cover;box-shadow:0 9px 28px #0c583315}
+.hero:after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#c69b32,#ffe7a1,#c69b32);z-index:-1}
+.hero h2{font-size:30px;max-width:640px;line-height:1.25}.hero p{color:#e2f1e5;max-width:570px}.hero .eyebrow{color:#f5d479}.hero button{background:#edc65b;color:#19472d;border:1px solid #ffe6a0;box-shadow:0 5px 20px #002b2620}
+.toolbar{background:#fff}.upload{background:#f5fbf7;border-color:#badbc7}.stat,.lesson-card{background:white}
+input,select,textarea{border-color:#cbded0;color:#193e30}input:focus,select:focus,textarea:focus{outline-color:#359c70}input:disabled{background:#f2f7f4}
+th{background:#f3f8f5;color:#526e5e;border-bottom-color:var(--line);font-size:14px}td{border-bottom-color:#e8f0eb}
+.badge{background:#e8f5ec;color:#1b6540}.badge.nghi{background:#fff0ed;color:#a6342b}.badge.hoc_bu{background:#fff4dc;color:#825b16}.badge.thi{background:#f1ecfb;color:#6545a2}
+.open-timetable{background:#086344}.timetable-card{border-color:#d9e8dd;background:linear-gradient(140deg,#fff,#fbfefb);border-radius:14px}.timetable-card h3{color:#174b34}
+.legacy-schedule{background:#edf5ef}.timetable-help{background:#fbfdfb}.selected-class{background:#edf8f0}.class-link{color:#086344!important;text-decoration-color:#8ab99e!important}.class-link:hover{background:#e7f5ec!important}
+dialog{box-shadow:0 24px 90px #063b2e35}dialog::backdrop{background:#042c2569}.demo{background:#fff8e8;border-color:#ead7a1;color:#705627}
+.login{grid-template-columns:1.2fr minmax(430px,.8fr);background:white}
+.login-story{padding:54px 58px;background:linear-gradient(180deg,rgba(249,255,249,.96) 0%,rgba(245,255,248,.88) 34%,rgba(244,255,248,.45) 59%,rgba(3,56,33,.56) 100%),url('brand/campus.webp') center bottom/cover;color:#0a5035;min-height:100vh}
+.login-story:after{display:none}.login-story .brand-logo{width:76px;height:76px;padding:6px;border-radius:18px}.login-story .brand{font-size:27px}.login-story .brand small{font-size:12px;color:#3f7257}
+.login-story h1{font-size:clamp(38px,3.6vw,56px);line-height:1.12;letter-spacing:-1.7px;margin:34px 0 20px;color:#0a5035;text-shadow:0 1px 12px #ffffff80}
+.login-story .eyebrow{color:#2d6246;font-size:12px;letter-spacing:1.3px;line-height:1.7}
+.login-story p{color:#315f46;font-size:17px;font-weight:500;max-width:470px}.login-tags{margin:24px 0}.login-tags span{background:#ffffffc9;border:1px solid #83ac8a66;color:#1b593a;backdrop-filter:blur(5px)}
+.login-note{color:white;font-weight:500;text-shadow:0 1px 8px #123d24}
+.login-box{background:#fff;padding:54px 44px;border-left:1px solid #dbe8de}.login-form{max-width:410px}.login-form>.eyebrow{color:#4d7b5f}.login-form h2{color:#174b34;margin-top:14px;font-size:31px}.login-form button[type=submit]{min-height:52px;box-shadow:0 7px 18px #08634420}
+.login-form .demo{margin-top:22px}.login-form>a{font-size:14px;font-weight:650}
+@media(max-width:1050px){.shell{grid-template-columns:220px 1fr}.sidebar{width:220px;padding:28px 18px}.sidebar .brand{font-size:18px;gap:10px}.sidebar .brand-logo{width:47px;height:47px}.sidebar .brand small{font-size:10px;letter-spacing:1.1px}.login{grid-template-columns:1fr 1fr}.login-story{padding:42px 32px}.login-box{padding:42px 28px}.login-story .brand{font-size:23px}.login-story .brand-logo{width:64px;height:64px}.hero h2{font-size:26px}}
+@media(max-width:720px){.shell{display:block}.sidebar{width:100%;position:static;padding:17px 20px;background:linear-gradient(125deg,#07593c,#03442d)}.sidebar .brand{font-size:21px;margin-bottom:17px}.sidebar .brand-logo{width:51px;height:51px}.sidebar nav button{padding:11px 13px}.sidebar nav button.active{box-shadow:inset 0 -3px #edc65b}.topbar{padding:13px 18px;border-top-width:3px}.school-name{font-size:11px;line-height:1.5}.content{padding:24px 16px}.hero{min-height:260px;padding:25px;background-position:63% center;background-image:linear-gradient(90deg,rgba(4,77,48,.98),rgba(4,77,48,.85) 65%,rgba(4,77,48,.55)),url('brand/campus.webp')}.hero h2{font-size:25px}.hero p{font-size:15px}.login{grid-template-columns:1fr}.login-story{padding:24px;min-height:310px;background-position:center 51%;background-image:linear-gradient(90deg,rgba(248,255,249,.97),rgba(248,255,249,.87) 70%,rgba(248,255,249,.48)),url('brand/campus.webp')}.login-story .brand{font-size:23px}.login-story .brand-logo{width:61px;height:61px}.login-story .eyebrow{font-size:10px;letter-spacing:1px;margin-top:18px}.login-story h1{font-size:31px;margin:16px 0 0;letter-spacing:-.8px}.login-story p,.login-tags,.login-note{display:none}.login-box{padding:32px 24px;border-left:0;border-top:3px solid #d7b750}.login-form h2{font-size:27px}.login-form>.eyebrow{font-size:11px}.panel-header{flex-wrap:wrap}.stats .stat{padding:16px 12px}}
+
+.offline-panel{max-width:520px;margin:15vh auto;padding:32px}

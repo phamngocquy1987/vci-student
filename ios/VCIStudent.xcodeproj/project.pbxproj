@@ -1,0 +1,40 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+		DC74BF408F188B1AA6037213 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppStore.swift"; sourceTree = "<group>"; };
+		A50372FFE2F4A08489DCC4CE = { isa = PBXBuildFile; fileRef = DC74BF408F188B1AA6037213; };
+		46064E2950C7866F661E3314 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Components.swift"; sourceTree = "<group>"; };
+		81FF2A87D9E313E8864CA984 = { isa = PBXBuildFile; fileRef = 46064E2950C7866F661E3314; };
+		04458973CBF03F7459337F43 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keychain.swift"; sourceTree = "<group>"; };
+		FF178DD13F0F1A1DE71B8567 = { isa = PBXBuildFile; fileRef = 04458973CBF03F7459337F43; };
+		451A6738F2EF3722082753B3 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView.swift"; sourceTree = "<group>"; };
+		01583AEE75B8E6ACAF30D711 = { isa = PBXBuildFile; fileRef = 451A6738F2EF3722082753B3; };
+		C564D8E6C880B7838D5AF748 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models.swift"; sourceTree = "<group>"; };
+		FD825685184AF3166D56C1B1 = { isa = PBXBuildFile; fileRef = C564D8E6C880B7838D5AF748; };
+		619C620AA08937C7D72A034C = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudentViews.swift"; sourceTree = "<group>"; };
+		B01D9564D1C5BC2363CB2CD7 = { isa = PBXBuildFile; fileRef = 619C620AA08937C7D72A034C; };
+		96DBE2D3ADACC92C71B128C0 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VCIStudentApp.swift"; sourceTree = "<group>"; };
+		6134157AA66A72F303987FA9 = { isa = PBXBuildFile; fileRef = 96DBE2D3ADACC92C71B128C0; };
+		05529D7BAF9BE1F1AD75AA78 = { isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D0ADC22F3C046CC76298F620 = { isa = PBXBuildFile; fileRef = 05529D7BAF9BE1F1AD75AA78; };
+		A8792157CB4F27FB949C035F = { isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VCIStudent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1455444174429298B0F374B3 = { isa = PBXGroup; children = (DC74BF408F188B1AA6037213,46064E2950C7866F661E3314,04458973CBF03F7459337F43,451A6738F2EF3722082753B3,C564D8E6C880B7838D5AF748,619C620AA08937C7D72A034C,96DBE2D3ADACC92C71B128C0,05529D7BAF9BE1F1AD75AA78,); path = VCIStudent; sourceTree = "<group>"; };
+		0A3E27B8CA818264D75C8D81 = { isa = PBXGroup; children = (A8792157CB4F27FB949C035F,); name = Products; sourceTree = "<group>"; };
+		19F479106CE8C3BA8C106518 = { isa = PBXGroup; children = (1455444174429298B0F374B3,0A3E27B8CA818264D75C8D81,); sourceTree = "<group>"; };
+		878A52FC5FF6A57D50B7B870 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A50372FFE2F4A08489DCC4CE,81FF2A87D9E313E8864CA984,FF178DD13F0F1A1DE71B8567,01583AEE75B8E6ACAF30D711,FD825685184AF3166D56C1B1,B01D9564D1C5BC2363CB2CD7,6134157AA66A72F303987FA9,); runOnlyForDeploymentPostprocessing = 0; };
+		E2AA269EB967A8853A258BFA = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		41D311A605520FC7B8B9A980 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (D0ADC22F3C046CC76298F620,); runOnlyForDeploymentPostprocessing = 0; };
+		5DF0EAF287A59303D4EFEAF3 = { isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; ONLY_ACTIVE_ARCH = YES; }; name = Debug; };
+		B8EB4DC6EE71CC2FBFD201B8 = { isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = "Config/Info-Debug.plist"; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks",); MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = vn.edu.vci.student.dev; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SUPPORTS_MACCATALYST = NO; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+		C62D9534737287C44FD6EF43 = { isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SWIFT_VERSION = 5.0; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O"; VALIDATE_PRODUCT = YES; }; name = Release; };
+		2EF9ECCD715FED9D8FF379BE = { isa = XCBuildConfiguration; buildSettings = {ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = "Config/Info.plist"; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks",); MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = vn.edu.vci.student.dev; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SUPPORTS_MACCATALYST = NO; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+		7ED5184A5487DF185E3420D0 = { isa = XCConfigurationList; buildConfigurations = (5DF0EAF287A59303D4EFEAF3,C62D9534737287C44FD6EF43,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		82A58AF6F77EDCFC78A65DA6 = { isa = XCConfigurationList; buildConfigurations = (B8EB4DC6EE71CC2FBFD201B8,2EF9ECCD715FED9D8FF379BE,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		34A04005BCAF206EEC990BD9 = { isa = PBXNativeTarget; buildConfigurationList = 82A58AF6F77EDCFC78A65DA6; buildPhases = (878A52FC5FF6A57D50B7B870,E2AA269EB967A8853A258BFA,41D311A605520FC7B8B9A980,); buildRules = (); dependencies = (); name = VCIStudent; productName = VCIStudent; productReference = A8792157CB4F27FB949C035F; productType = "com.apple.product-type.application"; };
+		244210E48437B6556980A702 = { isa = PBXProject; attributes = { LastUpgradeCheck = 1600; }; buildConfigurationList = 7ED5184A5487DF185E3420D0; compatibilityVersion = "Xcode 14.0"; developmentRegion = vi; hasScannedForEncodings = 0; knownRegions = (vi,en,Base,); mainGroup = 19F479106CE8C3BA8C106518; productRefGroup = 0A3E27B8CA818264D75C8D81; projectDirPath = ""; projectRoot = ""; targets = (34A04005BCAF206EEC990BD9,); };
+	};
+	rootObject = 244210E48437B6556980A702;
+}

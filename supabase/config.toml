@@ -1,0 +1,7 @@
+project_id = "vci-student"
+
+[functions.vci-api]
+verify_jwt = false
+
+# vci-api verifies each bearer token using Auth.getUser, then checks the
+# administrator role from the protected accounts table before privileged work.
